@@ -34,9 +34,10 @@ def get_args():
                         help='capture height',
                         type=int,
                         default=540)
-    parser.add_argument("--ceil", type=int, default=150)
+    parser.add_argument("--ceil", type=int, default=50)
+    parser.add_argument("--image_ratio", type=float, default=1.2)
     parser.add_argument("--x_offset", type=int, default=0)
-    parser.add_argument("--y_offset", type=int, default=-50)
+    parser.add_argument("--y_offset", type=int, default=-30)
 
     args = parser.parse_args()
 
@@ -50,6 +51,7 @@ def main():
     cap_width = args.width
     cap_height = args.height
     ceil_num = args.ceil
+    image_ratio = args.image_ratio
     x_offset = args.x_offset
     y_offset = args.y_offset
 
@@ -100,6 +102,8 @@ def main():
                 (resize_image_height + (ceil_num - 1)) / ceil_num * ceil_num)
             resize_image_width = int(
                 (resize_image_width + (ceil_num - 1)) / ceil_num * ceil_num)
+            resize_image_height = int(resize_image_height * image_ratio)
+            resize_image_width = int(resize_image_width * image_ratio)
 
             resize_image = cv.resize(images[animation_counter],
                                      (resize_image_width, resize_image_height))
