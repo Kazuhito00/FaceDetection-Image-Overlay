@@ -1,6 +1,6 @@
 # FaceDetection-Image-Overlay
 顔検出を行い、検出した顔の上に画像を重ねるデモです。<br>
-顔検出に[Star-Clouds/CenterFace](https://github.com/Star-Clouds/CenterFace)を利用しています。<br>
+顔検出は[Star-Clouds/CenterFace](https://github.com/Star-Clouds/CenterFace)を利用しています。<br>
 ![nwgqx-oy39q](https://user-images.githubusercontent.com/37477845/99551738-8f268e00-29ff-11eb-8565-5dd9eaadc534.gif)
 
 # Requirement 
