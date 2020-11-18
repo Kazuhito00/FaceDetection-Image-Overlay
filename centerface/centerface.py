@@ -12,6 +12,8 @@ class CenterFace(object):
         else:
             self.net = cv2.dnn.readNetFromONNX(
                 'centerface/models/onnx/cface.1k.onnx')
+        # self.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+        # self.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
         self.img_h_new, self.img_w_new, self.scale_h, self.scale_w = 0, 0, 0, 0
 
     def __call__(self, img, height, width, threshold=0.5):
