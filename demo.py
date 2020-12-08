@@ -11,6 +11,8 @@ import argparse
 import cv2 as cv
 
 from centerface import CenterFace
+from dbface import DBFaceTflite
+
 from utils import CvOverlayImage
 
 
@@ -38,6 +40,7 @@ def get_args():
     parser.add_argument("--image_ratio", type=float, default=1.2)
     parser.add_argument("--x_offset", type=int, default=0)
     parser.add_argument("--y_offset", type=int, default=-30)
+    parser.add_argument("--use_model", type=str, default='centerface')
 
     args = parser.parse_args()
 
@@ -54,6 +57,7 @@ def main():
     image_ratio = args.image_ratio
     x_offset = args.x_offset
     y_offset = args.y_offset
+    use_model = args.use_model
 
     # カメラ準備 ###############################################################
     cap = cv.VideoCapture(cap_device)
@@ -66,8 +70,11 @@ def main():
 
     animation_counter = 0
 
-    # CenterFace準備 ###########################################################
-    centerface = CenterFace()
+    # facedetector準備 #########################################################
+    if use_model == 'centerface':
+        facedetector = CenterFace()
+    elif use_model == 'dbface':
+        facedetector = DBFaceTflite()
 
     while True:
         # カメラキャプチャ #####################################################
@@ -78,10 +85,10 @@ def main():
         frame_height, frame_width = resize_frame.shape[:2]
 
         # 顔検出 ##############################################################
-        dets, lms = centerface(resize_frame,
-                               frame_height,
-                               frame_width,
-                               threshold=0.35)
+        dets, lms = facedetector(resize_frame,
+                                 frame_height,
+                                 frame_width,
+                                 threshold=0.35)
 
         # デバッグ表示 ########################################################
         # バウンディングボックス
@@ -114,11 +121,14 @@ def main():
             resize_frame = CvOverlayImage.overlay(
                 resize_frame, resize_image,
                 (overlay_x + x_offset, overlay_y + y_offset))
+
         # ランドマーク
         # for lm in lms:
-        #     for i in range(0, 5):
-        #         cv.circle(resize_frame, (int(lm[i * 2]), int(lm[i * 2 + 1])),
-        #                   3, (0, 0, 255), -1)
+        #     for lm_point in lm:
+        #         cv.circle(resize_frame, (
+        #             lm_point[0],
+        #             lm_point[1],
+        #         ), 3, (0, 0, 255), -1)
 
         animation_counter += 1
         if animation_counter >= len(images):

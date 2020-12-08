@@ -37,7 +37,31 @@ class CenterFace(object):
             heatmap, scale, offset = self.net.forward(["535", "536", "537"])
         end = datetime.datetime.now()
         # print("cpu times = ", end - begin)
-        return self.postprocess(heatmap, lms, offset, scale, threshold)
+
+        if self.landmarks:
+            dets, lms = self.postprocess(heatmap, lms, offset, scale,
+                                         threshold)
+            dets = dets.tolist()
+            for i, det in enumerate(dets):
+                dets[i][0] = int(det[0])
+                dets[i][1] = int(det[1])
+                dets[i][2] = int(det[2])
+                dets[i][3] = int(det[3])
+
+            lms = lms.tolist()
+            for i, lm in enumerate(lms):
+                lm = [int(lm_point) for lm_point in lm]
+                lms[i] = [lm[i:i + 2] for i in range(0, len(lm), 2)]
+            return dets, lms
+        else:
+            dets = self.postprocess(heatmap, lms, offset, scale, threshold)
+            dets = dets.tolist()
+            for i, det in enumerate(dets):
+                dets[i][0] = int(det[0])
+                dets[i][1] = int(det[1])
+                dets[i][2] = int(det[2])
+                dets[i][3] = int(det[3])
+            return dets
 
     def transform(self, h, w):
         img_h_new, img_w_new = int(np.ceil(h / 32) * 32), int(
