@@ -39,6 +39,7 @@ python demo.py
 
 # Reference
 * [Star-Clouds/CenterFace](https://github.com/Star-Clouds/CenterFace)
+* [PINTO0309/PINTO_model_zoo/041_DBFace](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)
 
 # Author
 高橋かずひと(https://twitter.com/KzhtTkhs)
@@ -47,5 +48,6 @@ python demo.py
 FaceDetection-Image-Overlay is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).<br>
 ※Imageディレクトリ内の画像はMITライセンス対象外です
 
-# License(CenterFace)
+# License(CenterFace, DBFace)
 CenterFace is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+DBFace is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
