@@ -49,5 +49,5 @@ FaceDetection-Image-Overlay is under [MIT license](https://en.wikipedia.org/wiki
 ※Imageディレクトリ内の画像はMITライセンス対象外です
 
 # License(CenterFace, DBFace)
-CenterFace is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+CenterFace is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).<br>
 DBFace is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
