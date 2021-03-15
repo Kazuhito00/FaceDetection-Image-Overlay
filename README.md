@@ -36,6 +36,9 @@ python demo.py
 * --y_offset<br>
 顔へ重畳表示する際の画像のY座標オフセット<br>
 デフォルト：-30
+* --use_model<br>
+顔検出に使用するモデルの選択(centerface, dbfaceが使用可能)<br>
+デフォルト：centerface
 
 # Reference
 * [Star-Clouds/CenterFace](https://github.com/Star-Clouds/CenterFace)
